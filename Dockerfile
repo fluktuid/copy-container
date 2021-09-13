@@ -55,6 +55,8 @@ ARG PROJECT_NAME=copy-container
 # Import the user and group files from the builder.
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
+# copy license
+COPY LICENSE /LICENSE
 # create tmp directory
 COPY --from=builder /my_tmp /tmp
 # Copy static executable.
