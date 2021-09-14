@@ -25,3 +25,9 @@ The App configuration is done via env variables.
 ``` bash
 $ docker build .
 ```
+
+### Dependencies
+
+- [otiai10/copy](github.com/otiai10/copy) (MIT)
+- [kelseyhightower/envconfig](github.com/kelseyhightower/envconfig) (MIT)
+- [sirupsen/logrus](github.com/sirupsen/logrus) (MIT)
