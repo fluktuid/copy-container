@@ -1,5 +1,8 @@
 # Copy-Container
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/fluktuid/copy-container)](https://goreportcard.com/report/github.com/fluktuid/copy-container)
+[![Go Reference](https://pkg.go.dev/badge/github.com/fluktuid/copy-container.svg)](https://pkg.go.dev/github.com/fluktuid/copy-container)
+
 This project contains a simple go service for copying from one to another folder.
 
 The copying is especially useful if you need a tiny distroless container copying data from one pvc to another, e.g. in a kubernetes cluster.
