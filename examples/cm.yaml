@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: copy-config
+  labels:
+    app.kubernetes.io/component: copy
+data:
+  SET_PERMISSION: "0" # don't change permission
+  SYNC: "true"
+  SKIP_ON_EXIST: "false"
+  PRESERVE_TIMES: "true"
+  BUFFER: 131027 # 128 kb
+  LOG_FORMATTER_JSON: debug
+  LOG_LEVEL: warn
+---
+

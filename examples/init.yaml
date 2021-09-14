@@ -1,0 +1,37 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-web
+  labels:
+    app.kubernetes.io/component: copy
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["find", "/to"]
+    - name: to
+      mountPath: /to
+      readOnly: false
+  initContainers:
+  - name: copy
+    image: copy-container
+    envFrom:
+    - configMapRef:
+        name: copy-config
+    volumeMounts:
+    - name: from
+      mountPath: /from
+      readOnly: true
+    - name: to
+      mountPath: /to
+      readOnly: false
+
+# specify your volumes here
+volumes:
+- name: from
+  emptyDir: {}
+- name: to
+  emptyDir: {}
+...
+

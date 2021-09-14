@@ -1,0 +1,31 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: copy-container
+  labels:
+    app.kubernetes.io/component: copy
+spec:
+  template:
+    spec:
+      containers:
+      - name: copy
+        image: copy-container
+        envFrom:
+        - configMapRef:
+            name: copy-config
+      volumeMounts:
+      - name: from
+        mountPath: /from
+        readOnly: true
+      - name: to
+        mountPath: /to
+        readOnly: false
+      restartPolicy: OnFailure
+volumes:
+- name: from
+  emptyDir: {}
+- name: to
+  emptyDir: {}
+...
+
