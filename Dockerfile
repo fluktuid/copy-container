@@ -3,6 +3,8 @@
 # STEP 1 build executable binary
 ############################
 FROM golang:1.17-alpine AS builder
+ARG USER=appuser
+ARG UID=10001
 ARG GO_FILES=.
 ARG GO_MAIN=main.go
 LABEL maintainer="Lukas Paluch <fluktuid@users.noreply.github.com>"
@@ -13,9 +15,6 @@ RUN apk update && apk add --no-cache git
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-# Create appuser.
-ENV USER=appuser
-ENV UID=10001
 # See https://stackoverflow.com/a/55757473/12429735RUN
 RUN adduser \
     --disabled-password \
@@ -50,6 +49,8 @@ RUN chown -R ${USER}:${USER} /my_tmp
 # STEP 2 build a small image
 ############################
 FROM scratch
+ARG USER=appuser
+ARG UID=10001
 LABEL maintainer="Lukas Paluch <fluktuid@users.noreply.github.com>"
 LABEL org.opencontainers.image.source https://github.com/fluktuid/copy-container
 ARG PROJECT_NAME=copy-container
@@ -63,8 +64,10 @@ COPY --from=builder /my_tmp /tmp
 # Copy static executable.
 COPY --from=builder /app/main /main
 
+ENV USER=$USER
+ENV UID=$UID
 # Use an unprivileged user.
-USER ${USER}:${USER}
+USER ${UID}:${UID}
 
 
 # Run the binary.
