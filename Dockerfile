@@ -2,7 +2,7 @@
 ############################
 # STEP 1 build executable binary
 ############################
-FROM golang:1.17-alpine AS builder
+FROM golang:1.19.3-alpine AS builder
 ARG USER=appuser
 ARG UID=10001
 ARG GO_FILES=.
